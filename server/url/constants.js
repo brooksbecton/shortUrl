@@ -1327,6 +1327,7 @@ const emojiList = [
   '🏴‍☠️'
 ];
 
-const emojis = emojiList.filter(e => e.length === 1);
+// const emojis = emojiList.filter(e => e.length === 1);
+const emojis = 'abcdefghijklmnopqrstuvwxyz1234567890'.split('');
 
 module.exports = { emojis };

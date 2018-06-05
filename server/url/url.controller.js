@@ -7,9 +7,14 @@ const Count = require('./../count/count.model');
  * @property {string} req.body.hash - Short Url Hash
  * @returns {String} - url
  */
-function get(req, res) {
-  const hash = req.hash;
-  res.sendStatus(404);
+async function get(req, res) {
+  const hash = req.params.hash;
+  const hashId = await Url.deShorten(hash);
+  if (hashId) {
+    res.send(hashId);
+  } else {
+    res.sendStatus(404);
+  }
 }
 
 async function list(req, res) {

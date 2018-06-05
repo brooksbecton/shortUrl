@@ -13,19 +13,20 @@ UrlSchema.statics = {
   // based here: https://stackoverflow.com/questions/742013/how-to-code-a-url-shortener
   shorten({ alphabet, count }) {
     const digits = [];
-    while (count > 0) {
+    while (count >= 0) {
       const remainder = count % alphabet.length;
       digits.push(remainder);
       count = Math.floor(count / alphabet.length);
+      count--;
     }
     return digits.reverse().toString();
   },
-  deShorten(hash) {
-    const userEmojis = hash.split('');
-
-    const idList = userEmojis.map(emoji => emojis.indexOf(emoji));
-    const hashId = idList.join();
-    return this.findOne({ hashId });
+  async deShorten(hash) {
+    const idList = Array.from(hash).map(emoji => emojis.indexOf(emoji));
+    if (!(idList.indexOf(-1) !== -1)) {
+      const hashId = idList.join();
+      return await this.findOne({ hashId }, (err, x) => x);
+    }
   },
   /**
    * Get url
@@ -35,7 +36,7 @@ UrlSchema.statics = {
   get(id) {
     return this.findById(id)
       .exec()
-      .then((url) => {
+      .then(url => {
         if (url) {
           return url;
         }

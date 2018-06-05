@@ -15,10 +15,10 @@ async function create(count = 0) {
  * @returns {Number} - count
  */
 async function get(req, res) {
-  const count = await Count.get();
-  if (count) {
-    res.send(count);
-  } else {
+  try {
+    const count = await Count.get();
+    res.send({ count });
+  } catch (e) {
     // Create the count and retry
     const resp = await create();
     get(req, res);
