@@ -6,8 +6,7 @@ const APIError = require('../helpers/APIError');
 
 const UrlSchema = new mongoose.Schema({
   hashId: { type: Number, required: true },
-  url: { type: String, required: true },
-  shortUrl: { type: String, required: true }
+  url: { type: String, required: true }
 });
 
 UrlSchema.statics = {
@@ -19,7 +18,7 @@ UrlSchema.statics = {
       digits.push(remainder);
       count = Math.floor(count / alphabet.length);
     }
-    return digits.reverse();
+    return digits.reverse().toString();
   },
   deShorten(hash) {
     const userEmojis = hash.split('');
@@ -29,27 +28,25 @@ UrlSchema.statics = {
     return this.findOne({ hashId });
   },
   /**
-   * Get user
-   * @param {ObjectId} id - The objectId of user.
-   * @returns {Promise<User, APIError>}
+   * Get url
+   * @param {ObjectId} id - The objectId of url.
+   * @returns {Promise<Url, APIError>}
    */
-
   get(id) {
     return this.findById(id)
       .exec()
-      .then((user) => {
-        if (user) {
-          return user;
+      .then((url) => {
+        if (url) {
+          return url;
         }
         const err = new APIError('No such url exists!', httpStatus.NOT_FOUND);
         return Promise.reject(err);
       });
   },
-
   /**
-   * List users in descending order of 'createdAt' timestamp.
-   * @param {number} skip - Number of users to be skipped.
-   * @param {number} limit - Limit number of users to be returned.
+   * List urls in descending order of 'createdAt' timestamp.
+   * @param {number} skip - Number of urls to be skipped.
+   * @param {number} limit - Limit number of urls to be returned.
    * @returns {Promise<User[]>}
    */
   list({ skip = 0, limit = 50 } = {}) {
