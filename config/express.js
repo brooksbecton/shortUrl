@@ -56,8 +56,10 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'Hey', message: 'Hello there!' });
 });
 
-app.get('/:hash', (req, res) => {
-  res.redirect('/');
+app.get('/:hash', async (req, res) => {
+  const hash = req.params.hash;
+  const { url } = await Url.deShorten(hash);
+  res.redirect(url);
 });
 
 // mount all routes on /api path
