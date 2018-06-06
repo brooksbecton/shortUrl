@@ -38,7 +38,8 @@ async function main() {
   } catch (error) {
     result = 'Not a Valid URL';
   }
-  document.querySelector('.resultURL').innerHTML = result;
+  const url = window.location + result;
+  document.querySelector('.resultURL').innerHTML = "<a href='" + url + " '>" + url + '</a>';
 }
 
 function isUrl(str) {

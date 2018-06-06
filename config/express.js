@@ -53,7 +53,7 @@ if (config.env === 'development') {
 }
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Hey', message: 'Hello there!' });
+  res.render('index');
 });
 
 app.get('/:hash', async (req, res) => {
