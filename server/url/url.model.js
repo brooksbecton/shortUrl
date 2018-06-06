@@ -24,9 +24,14 @@ UrlSchema.statics = {
   async deShorten(hash) {
     const idList = Array.from(hash).map(emoji => emojis.indexOf(emoji));
     if (!(idList.indexOf(-1) !== -1)) {
-      const hashId = idList;
       try {
-        return await this.findOne({ hashId }, (err, x) => x);
+        return await this.findOne({ hashId: idList }, (err, url) => {
+          if (!err && url) {
+            return url;
+          } else {
+            return undefined;
+          }
+        });
       } catch (error) {
         return new Error('No Short Url for ' + hash);
       }

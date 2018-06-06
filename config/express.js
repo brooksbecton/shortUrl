@@ -58,9 +58,9 @@ app.get('/', (req, res) => {
 
 app.get('/:hash', async (req, res) => {
   const hash = req.params.hash;
-  const { url } = await Url.deShorten(hash);
-  if (url) {
-    res.redirect(url);
+  const result = await Url.deShorten(hash);
+  if (result && result.url) {
+    res.redirect(result.url);
   } else {
     res.render('index', { err: 'No Short Url for ' + hash });
   }
