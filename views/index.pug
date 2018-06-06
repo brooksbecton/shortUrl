@@ -1,16 +1,29 @@
-html
+html(lang="en")
   head
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta( name="Description" content="Academic URL Shortener")
     script(src='/js/index.js')
-    title= title
-  body
-    h1 Shorten a URL
-    input(class="targetUrl" type="text")
-    input(type="submit" onClick="main()")
-    div
-      h2 Result
-      a(class="resultURL")
-    if err
-      
-      strong 
-        p Error #{err}
-      
+    title= "Url Shortener"
+    link( rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic")
+    link( rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css")
+    link( rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css")
+    link( rel="stylesheet" href="css/style.css")
+    link( rel="stylesheet" href="css/card.css")
+  body(class="main-container")
+    div(class="container")
+      div(class="row")
+        div(class="column")
+          div(class="card")
+            h1 Shorten a URL
+            label URL 
+              input(class="targetUrl" type="text")
+            input(type="submit" onClick="main()")
+          div(class="card")
+            h2 Result
+            a(class="resultURL")
+          
+          if err
+            div(class="card")
+              strong 
+                p Error #{err}
+        
