@@ -5,7 +5,7 @@ const { emojis } = require('./constants');
 const APIError = require('../helpers/APIError');
 
 const UrlSchema = new mongoose.Schema({
-  hashId: { type: Number, required: true },
+  hashId: { type: [Number], required: true },
   url: { type: String, required: true }
 });
 
@@ -19,12 +19,12 @@ UrlSchema.statics = {
       count = Math.floor(count / alphabet.length);
       count--;
     }
-    return digits.reverse().toString();
+    return digits.reverse();
   },
   async deShorten(hash) {
     const idList = Array.from(hash).map(emoji => emojis.indexOf(emoji));
     if (!(idList.indexOf(-1) !== -1)) {
-      const hashId = idList.join();
+      const hashId = idList;
       try {
         return await this.findOne({ hashId }, (err, x) => x);
       } catch (error) {

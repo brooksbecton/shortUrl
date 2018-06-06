@@ -20,9 +20,7 @@ async function shortenUrl(url) {
     if (isUrl(url)) {
       const result = await postData('/api/url', { url });
       const abc = 'abcdefghijklmnopqrstuvwxyz1234567890'.split('');
-      const shortUrl = Array.from(result.hashId.toString())
-        .map(n => abc[n])
-        .join();
+      const shortUrl = result.hashId.map(n => abc[n]).join('');
       resolve(shortUrl);
     } else {
       reject('Not Valid URL');
