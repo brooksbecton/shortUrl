@@ -10,7 +10,12 @@ const UrlSchema = new mongoose.Schema({
 });
 
 UrlSchema.statics = {
-  // based here: https://stackoverflow.com/questions/742013/how-to-code-a-url-shortener
+  /**
+   * Creates a unique hash based of a given alphabet and count
+   * {@link https://stackoverflow.com/questions/742013/how-to-code-a-url-shortener | Example}
+   * @param {Array} alphabet
+   * @param {Array} count
+   */
   shorten({ alphabet, count }) {
     const digits = [];
     while (count >= 0) {
@@ -21,6 +26,12 @@ UrlSchema.statics = {
     }
     return digits.reverse();
   },
+  /**
+   * Takes hash from a shortUrl and returns the url for that hash
+   * @async
+   * @param {String} hash
+   * @returns {String|undefined}
+   */
   async deShorten(hash) {
     const idList = Array.from(hash).map(emoji => emojis.indexOf(emoji));
     if (!(idList.indexOf(-1) !== -1)) {

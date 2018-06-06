@@ -1,5 +1,9 @@
 const Count = require('./count.model');
 
+/**
+ * Creates a new count document
+ * @param {Number} count
+ */
 async function create(count = 0) {
   const newCount = new Count({
     count

@@ -25,6 +25,10 @@ CountSchema.statics = {
     const err = new APIError('No Count availible', httpStatus.NOT_FOUND);
     return Promise.reject(err);
   },
+  /**
+   * Increments the current count
+   * @returns {Promise<count, APIError>}
+   */
   increment() {
     return this.find()
       .sort({ createdAt: -1 })

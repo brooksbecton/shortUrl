@@ -4,6 +4,7 @@ const Count = require('./../count/count.model');
 
 /**
  * Returns a given hash's full URL
+ * @async
  * @property {string} req.body.hash - Short Url Hash
  * @returns {String} - url
  */
@@ -17,17 +18,20 @@ async function get(req, res) {
   }
 }
 
+/**
+ * Returns a list of short url documents
+ * @returns {[String]}
+ */
 async function list(req, res) {
-  const url = await Url.list();
-  res.json(url);
+  const urls = await Url.list();
+  res.json(urls);
 }
 
-async function post(req, res) {
-  const url = req.body.url;
-  const result = await Url.post(url);
-  res.json(result);
-}
-
+/**
+ * Attempts to create a short url given a url
+ * @param {string} req.body.url - url to hash
+ * @returns {Object} - Url Document
+ */
 async function create(req, res, next) {
   const newUrl = req.body.url;
   const count = await Count.get();
