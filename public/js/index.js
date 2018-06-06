@@ -33,11 +33,11 @@ async function main() {
   let result;
   try {
     result = await shortenUrl(targetUrl);
+    const url = window.location + result;
+    document.querySelector('.resultURL').innerHTML = "<a href='" + url + " '>" + url + '</a>';
   } catch (error) {
-    result = 'Not a Valid URL';
+    document.querySelector('.resultURL').innerHTML = '<strong><p>' + error + '</p></strong>';
   }
-  const url = window.location + result;
-  document.querySelector('.resultURL').innerHTML = "<a href='" + url + " '>" + url + '</a>';
 }
 
 function isUrl(str) {
