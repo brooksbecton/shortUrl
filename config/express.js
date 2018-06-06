@@ -59,7 +59,11 @@ app.get('/', (req, res) => {
 app.get('/:hash', async (req, res) => {
   const hash = req.params.hash;
   const { url } = await Url.deShorten(hash);
-  res.redirect(url);
+  if (url) {
+    res.redirect(url);
+  } else {
+    res.render('index', { err: 'No Short Url for ' + hash });
+  }
 });
 
 // mount all routes on /api path

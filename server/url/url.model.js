@@ -25,7 +25,11 @@ UrlSchema.statics = {
     const idList = Array.from(hash).map(emoji => emojis.indexOf(emoji));
     if (!(idList.indexOf(-1) !== -1)) {
       const hashId = idList.join();
-      return await this.findOne({ hashId }, (err, x) => x);
+      try {
+        return await this.findOne({ hashId }, (err, x) => x);
+      } catch (error) {
+        return new Error('No Short Url for ' + hash);
+      }
     }
   },
   /**
