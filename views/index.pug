@@ -1,0 +1,11 @@
+html
+  head
+    script(src='/js/index.js')
+    title= title
+  body
+    h1 Shorten a URL
+    input(class="targetUrl" type="text")
+    input(type="submit" onClick="main()")
+    div
+      h2 Result
+      p(class="resultURL")
