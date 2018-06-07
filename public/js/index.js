@@ -47,8 +47,9 @@ async function main() {
   let result;
   try {
     result = await shortenUrl(targetUrl);
-    const url = window.location + result;
-    document.querySelector('.resultURL').innerHTML = "<a href='" + url + " '>" + url + '</a>';
+    const url = window.location + 'r/' + result;
+    const resultDom = document.querySelector('.resultURL');
+    resultDom.innerHTML = "<a class='animated fadeIn' href='" + url + " '>" + url + '</a>';
   } catch (error) {
     document.querySelector('.resultURL').innerHTML = '<strong><p>' + error + '</p></strong>';
   }

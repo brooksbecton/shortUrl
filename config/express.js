@@ -56,7 +56,7 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/:hash', async (req, res) => {
+app.get('/r/:hash', async (req, res) => {
   const hash = req.params.hash;
   const result = await Url.deShorten(hash);
   if (result && result.url) {
