@@ -1,5 +1,12 @@
 .main-container {
-  /* background-color: #6d0ca7; */
+  background-color: #6d0ca7;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right bottom,
+    from(#6d0ca7),
+    to(#842fb7)
+  );
   background: linear-gradient(to bottom right, #6d0ca7, #842fb7);
   margin-top: 2vh;
 }
