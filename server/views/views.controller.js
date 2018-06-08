@@ -35,11 +35,12 @@ function login() {
 
 function loginReturn() {
   console.log('here');
-  return passport.authenticate('facebook', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  });
-  res.sendStatus(200);
+  return (
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function (req, res) {
+      res.redirect('/');
+    }
+  );
 }
 
 module.exports = { home, login, loginReturn, passport };
