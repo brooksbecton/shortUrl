@@ -6,7 +6,8 @@ passport.use(
     {
       clientID: process.env.FB_ID,
       clientSecret: process.env.FB_SECRET,
-      callbackURL: `${process.env.BASE_URL}login/return`
+      callbackURL: `${process.env.BASE_URL}login/return`,
+      enableProof: true
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOneAndUpdate(
