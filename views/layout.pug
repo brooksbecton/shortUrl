@@ -1,0 +1,19 @@
+html(lang="en")
+  head
+    title My Site - #{title}
+      head
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta( name="Description" content="Academic URL Shortener")
+    title= "Url Shortener"
+    link( rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css")
+    link( rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" 
+         integrity="sha384-OHBBOqpYHNsIqQy8hL1U+8OXf9hH6QRxi0+EODezv82DfnZoV7qoHAZDwMwEJvSw"
+         crossorigin="anonymous")
+    link( rel="stylesheet" href="/css/style.css")
+    link( rel="stylesheet" href="/css/card.css")
+    block scripts
+      script(src='/js/index.js')
+
+  body(class="main-container")
+    block content

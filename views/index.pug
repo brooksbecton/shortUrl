@@ -1,31 +1,19 @@
-html(lang="en")
-  head
-    meta(name="viewport" content="width=device-width, initial-scale=1")
-    meta( name="Description" content="Academic URL Shortener")
-    script(src='/js/index.js')
-    title= "Url Shortener"
-    link( rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css")
-    link( rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css")
-    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" 
-         integrity="sha384-OHBBOqpYHNsIqQy8hL1U+8OXf9hH6QRxi0+EODezv82DfnZoV7qoHAZDwMwEJvSw"
-         crossorigin="anonymous")
-    link( rel="stylesheet" href="/css/style.css")
-    link( rel="stylesheet" href="/css/card.css")
+extends layout.pug
 
-  body(class="main-container")
-    div(class="form-container  container")
-      div(class="row")
-        div(class="column")
-          div(class="animated card fadeInDownBig")
-            h1 URL Shortener
-            label URL 
-              input(class="targetUrl" type="text")
-            input(type="submit" onClick="main()")
-            br
-            a(class="resultURL")
-            if err
-              strong 
-                p Error #{err}
-    a( class="animated fadeInLeftBig gh-logo float-right" href="https://github.com/brooksbecton/shortUrl" target="_blank")
-      img(src="images/GitHub-Logo.png" alt="GitHub Logo")
-        
+block content
+  div(class="form-container  container")
+    div(class="row")
+      div(class="column")
+        div(class="animated card fadeInDownBig")
+          h1 URL Shortener
+          label URL 
+            input(class="targetUrl" type="text")
+          input(type="submit" onClick="main()")
+          br
+          a(class="resultURL")
+          if err
+            strong 
+              p Error #{err}
+  a( class="animated fadeInLeftBig gh-logo float-right" href="https://github.com/brooksbecton/shortUrl" target="_blank")
+    img(src="images/GitHub-Logo.png" alt="GitHub Logo")
+      
