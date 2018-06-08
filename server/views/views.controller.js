@@ -6,8 +6,7 @@ passport.use(
     {
       clientID: process.env.FB_ID,
       clientSecret: process.env.FB_SECRET,
-      callbackURL: `${process.env.BASE_URL}login/return`,
-      enableProof: true
+      callbackURL: `${process.env.BASE_URL}login/return`
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOneAndUpdate(
@@ -30,11 +29,11 @@ function home(req, res) {
   res.render('index');
 }
 
-function login(req, res) {
+function login() {
   return passport.authenticate('facebook');
 }
 
-function loginReturn(req, res) {
+function loginReturn() {
   console.log('here');
   return passport.authenticate('facebook', {
     successRedirect: '/',

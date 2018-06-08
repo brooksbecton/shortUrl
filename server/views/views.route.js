@@ -4,11 +4,12 @@ const { home, login, passport } = require('./views.controller');
 const router = express.Router(); // eslint-disable-line new-cap
 
 router.route('/').get(home);
-router.route('/login').get(login());
-router.route('/login/return').get(
+router.route('/return').get(
   passport.authenticate('facebook', {
     successRedirect: '/',
     failureRedirect: '/login'
   })
 );
+router.route('/login').get(login());
+
 module.exports = router;
