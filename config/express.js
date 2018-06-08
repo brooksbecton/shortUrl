@@ -13,9 +13,8 @@ const winstonInstance = require('./winston');
 const routes = require('../index.route');
 const config = require('./config');
 const APIError = require('../server/helpers/APIError');
-
 const Url = require('./../server/url/url.model');
-
+const ViewsRoutes = require('./../server/views/views.route');
 const app = express();
 
 if (config.env === 'development') {
@@ -52,9 +51,7 @@ if (config.env === 'development') {
   );
 }
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
+app.use('/', ViewsRoutes);
 
 app.get('/r/:hash', async (req, res) => {
   const hash = req.params.hash;
@@ -68,6 +65,7 @@ app.get('/r/:hash', async (req, res) => {
 
 // mount all routes on /api path
 app.use('/api', routes);
+
 // if error is not an instanceOf APIError, convert it.
 app.use((err, req, res, next) => {
   if (err instanceof expressValidation.ValidationError) {
