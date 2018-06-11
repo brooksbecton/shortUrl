@@ -1,46 +1,29 @@
-const passport = require('passport');
-const { Strategy } = require('passport-facebook');
-const User = require('./../user/user.model');
-passport.use(
-  new Strategy(
-    {
-      clientID: process.env.FB_ID,
-      clientSecret: process.env.FB_SECRET,
-      callbackURL: `${process.env.BASE_URL}return`
-    },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOneAndUpdate(
-        { facebookId: profile.id },
-        (err, user) => {
-          if (err) {
-            return done(err);
-          }
-          done(null, user);
-        },
-        {
-          upsert: true
-        }
-      );
-    }
-  )
-);
+const passport = require('./../helpers/passport');
 
 function home(req, res) {
-  res.render('index');
+  res.render('index', { title: 'Home' });
 }
 
-function login() {
+function list(req, res) {
+  res.render('list', { title: 'List' });
+}
+
+function auth(req, res) {
+  res.render('auth', { title: 'Login' });
+}
+
+function processLogin() {
   return passport.authenticate('facebook');
 }
 
 function loginReturn() {
-  console.log('here');
   return (
-    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    passport.authenticate('facebook', { failureRedirect: '/auth' }),
     function (req, res) {
+      // Successful authentication, redirect home.
       res.redirect('/');
     }
   );
 }
 
-module.exports = { home, login, loginReturn, passport };
+module.exports = { auth, home, list, processLogin, loginReturn };

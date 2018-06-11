@@ -16,13 +16,13 @@ const APIError = require('../server/helpers/APIError');
 const Url = require('./../server/url/url.model');
 const ViewsRoutes = require('./../server/views/views.route');
 const app = express();
-
+const passport = require('./../server/helpers/passport');
 if (config.env === 'development') {
   app.use(logger('dev'));
 }
-
 // parse body params and attache them to req.body
 app.use(bodyParser.json());
+app.use(passport.initialize());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
